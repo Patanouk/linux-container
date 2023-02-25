@@ -6,7 +6,14 @@ FROM ubuntu:22.04 as base
 RUN apt-get update && apt-get install -y \
     curl \
     git \
-    jq
+    jq \
+    dnsutils \
+    man \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Used to restore man-pages. See https://askubuntu.com/questions/1173337/how-to-prevent-system-from-being-minimized
+RUN yes | unminimize
 
 ###################################
 ############    ZSH    ############
