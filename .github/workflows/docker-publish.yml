@@ -12,6 +12,7 @@ on:
 env:
   REGISTRY: registry.hub.docker.com
   IMAGE_NAME: patanouk/linux-container
+  IMAGE_VERSION: 1.0.0
 
 jobs:
   build-publish:
@@ -23,15 +24,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set docker image tag
-        id: docker-image-tag
-        run: |
-          tag="patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")"
-          echo "DOCKER_TAG=$tag" >> $GITHUB_OUTPUT
-
-      - name: my-step
-        run: echo ${{ steps.docker-image-tag.outputs.DOCKER_TAG }}
-
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -42,4 +34,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ steps.docker-image-tag.outputs.DOCKER_TAG }}
+          tags: $IMAGE_NAME:$IMAGE_VERSION
