@@ -22,7 +22,9 @@ jobs:
     steps:
       - name: Set docker image tag
         id: docker-image-tag
-        run: echo "DOCKER_TAG=patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
+        run: |
+          tag="patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")"
+          echo "DOCKER_TAG=$tag" >> $GITHUB_OUTPUT
 
       - name: my-step
         run: echo ${{ steps.docker-image-tag.outputs.tags.DOCKER_TAG }}
