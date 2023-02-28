@@ -20,6 +20,10 @@ jobs:
       contents: read
 
     steps:
+      - name: Set docker image tag
+        id: docker-image-tag
+        run: echo "DOCKER_TAG=patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -33,4 +37,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")
+          tags: ${{ steps.docker-image-tag.outputs.tags.DOCKER_TAG }}
