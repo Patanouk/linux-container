@@ -24,6 +24,9 @@ jobs:
         id: docker-image-tag
         run: echo "DOCKER_TAG=patanouk/linux-playground-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
 
+      - name: my-step
+        run: echo ${{ steps.docker-image-tag.outputs.tags.DOCKER_TAG }}
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
