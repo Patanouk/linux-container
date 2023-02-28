@@ -30,7 +30,7 @@ jobs:
           echo "DOCKER_TAG=$tag" >> $GITHUB_OUTPUT
 
       - name: my-step
-        run: echo ${{ steps.docker-image-tag.outputs.tags.DOCKER_TAG }}
+        run: echo ${{ steps.docker-image-tag.outputs.DOCKER_TAG }}
 #
 #
 #      - name: Login to Docker Hub
