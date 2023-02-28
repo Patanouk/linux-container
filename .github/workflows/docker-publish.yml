@@ -42,4 +42,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ steps.docker-image-tag.outputs.tags.DOCKER_TAG }}
+          tags: ${{ steps.docker-image-tag.outputs.DOCKER_TAG }}
